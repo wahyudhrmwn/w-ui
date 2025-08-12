@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles untuk Storybook */
+.sb-show-main {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Reset untuk story container */
+.sb-story {
+  padding: 1rem;
+}
+
+/* Perbaiki scroll pada Docs page agar konten panjang bisa di-scroll */
+.sbdocs-wrapper {
+  height: 100vh;
+  overflow: auto !important;
+}
+
+.sbdocs-content {
+  overflow: visible !important;
+}
+
+/* Khusus canvas dalam docs, pastikan container tidak memotong konten */
+.docs-story > div {
+  overflow: visible !important;
+}
+
+/* Pastikan root container Storybook tidak menahan scroll */
+html,
+body,
+#storybook-root,
+#root {
+  height: 100%;
+}

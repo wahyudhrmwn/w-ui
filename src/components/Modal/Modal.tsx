@@ -32,6 +32,10 @@ export interface ModalProps {
    * Custom className untuk modal content
    */
   className?: string;
+  /**
+   * Render modal inline (untuk Storybook docs)
+   */
+  inline?: boolean;
 }
 
 const modalSizes = {
@@ -50,30 +54,57 @@ export const Modal: React.FC<ModalProps> = ({
   closeOnEscape = true,
   children,
   className,
+  inline = false,
 }) => {
-  // Handle ESC key
+  // Handle ESC key and body scroll lock (skip in inline docs mode)
   useEffect(() => {
+    if (inline) return; // Do not lock scroll or bind ESC in inline render (Docs mode)
     if (!closeOnEscape) return;
-    
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && open) {
         onClose();
       }
     };
 
+    let didLockBody = false;
     if (open) {
       document.addEventListener("keydown", handleEscape);
-      // Prevent body scroll
       document.body.style.overflow = "hidden";
+      didLockBody = true;
     }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "unset";
+      if (didLockBody) {
+        document.body.style.overflow = "unset";
+      }
     };
-  }, [open, onClose, closeOnEscape]);
+  }, [open, onClose, closeOnEscape, inline]);
 
   if (!open) return null;
+
+  // Inline rendering untuk Storybook docs
+  if (inline) {
+    return (
+      <div className="relative">
+        <div
+          className={clsx(
+            // Base styles
+            "relative w-full transform rounded-lg bg-white shadow-xl border",
+
+            // Size styles
+            modalSizes[size],
+
+            // Custom className
+            className
+          )}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
@@ -82,17 +113,17 @@ export const Modal: React.FC<ModalProps> = ({
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
         onClick={closeOnOverlayClick ? onClose : undefined}
       />
-      
+
       {/* Modal Container */}
       <div className="flex min-h-full items-center justify-center p-4">
         <div
           className={clsx(
             // Base styles
             "relative w-full transform rounded-lg bg-white shadow-xl transition-all",
-            
+
             // Size styles
             modalSizes[size],
-            
+
             // Custom className
             className
           )}
@@ -129,14 +160,24 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
         {...props}
       >
         <div className="flex-1">{children}</div>
-        
+
         {showCloseButton && onClose && (
           <button
             onClick={onClose}
             className="ml-4 text-secondary-400 hover:text-secondary-600 transition-colors"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         )}
@@ -147,16 +188,13 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
 
 ModalHeader.displayName = "ModalHeader";
 
-export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ModalContentProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={clsx("p-6", className)}
-        {...props}
-      >
+      <div ref={ref} className={clsx("p-6", className)} {...props}>
         {children}
       </div>
     );
@@ -165,7 +203,8 @@ export const ModalContent = React.forwardRef<HTMLDivElement, ModalContentProps>(
 
 ModalContent.displayName = "ModalContent";
 
-export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ModalFooterProps
+  extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const ModalFooter = React.forwardRef<HTMLDivElement, ModalFooterProps>(
   ({ className, children, ...props }, ref) => {

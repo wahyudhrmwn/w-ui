@@ -1,0 +1,129 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# W-UI Component Library
+
+Selamat datang di **W-UI Component Library** - koleksi komponen React modern yang dibangun dengan TypeScript dan Tailwind CSS untuk aplikasi Next.js.
+
+## ✨ Features
+
+- 🚀 **Kompatible dengan Next.js** - Mendukung App Router dan Pages Router
+- 📦 **TypeScript** - Type definitions lengkap untuk developer experience optimal
+- 🎨 **Tailwind CSS** - Styling modern dengan utility-first approach
+- 🌳 **Tree-shakable** - Import hanya komponen yang dibutuhkan
+- 📱 **Responsive** - Desain responsive out-of-the-box
+- ♿ **Accessible** - Komponen accessible dan semantic
+- 🔧 **Customizable** - Mudah dikustomisasi sesuai design system
+
+## 📚 Komponen Tersedia
+
+### Core Components
+
+- **Button** - Berbagai variant dan states dengan icon support
+- **Input** - Form input dengan validasi dan helper text
+- **Checkbox** - Boolean selections dengan indeterminate state
+
+### Layout Components
+
+- **Card** - Container untuk mengelompokkan konten
+- **Modal** - Dialog dan overlay dengan keyboard navigation
+
+### Display Components
+
+- **Badge** - Label dan status indicators
+
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+npm install w-ui
+# atau
+yarn add w-ui
+# atau
+pnpm add w-ui
+```
+
+### Setup Tailwind CSS
+
+W-UI menggunakan Tailwind CSS. Update `tailwind.config.js` Anda:
+
+```js
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    // PENTING: Include path ke w-ui library
+    "./node_modules/w-ui/dist/**/*.{js,ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          // Custom primary colors
+          500: "#3b82f6",
+          600: "#2563eb",
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+### Basic Usage
+
+```tsx
+import { Button, Card, CardHeader, CardContent, Input } from "w-ui";
+
+export default function MyPage() {
+  return (
+    <Card>
+      <CardHeader>
+        <h2>Welcome to W-UI</h2>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          <Input label="Email" type="email" placeholder="Enter your email" />
+          <Button variant="primary">Get Started</Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## 🎯 Interactive Examples
+
+Setiap komponen di Storybook ini dilengkapi dengan:
+
+- **Canvas Tab** - Visual testing komponen
+- **Controls Panel** - Test props secara real-time
+- **Actions Panel** - Monitor event handlers
+- **Docs Tab** - Dokumentasi auto-generated
+
+## 🔧 Customization
+
+Semua komponen dapat dikustomisasi dengan:
+
+- **className prop** - Custom CSS classes
+- **Tailwind utilities** - Direct styling
+- **CSS variables** - Theme customization
+- **Variant system** - Pre-built variations
+
+## 📖 Navigation
+
+Gunakan sidebar di sebelah kiri untuk menjelajahi semua komponen:
+
+- **W-UI/Button** - Button variants dan interactions
+- **W-UI/Input** - Form inputs dengan validasi
+- **W-UI/Card** - Layout containers
+- **W-UI/Badge** - Status indicators
+- **W-UI/Checkbox** - Boolean selections
+- **W-UI/Modal** - Dialogs dan overlays
+
+Setiap story mendemonstrasikan penggunaan yang berbeda dan dapat diinteraksikan langsung di Storybook.
+
+---
+
+**Happy coding! 🚀**
