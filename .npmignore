@@ -1,0 +1,40 @@
+# Source files
+src/
+demo/
+
+# Development files
+tsconfig.json
+tsup.config.ts
+tailwind.config.js
+postcss.config.cjs
+
+# Git files
+.git/
+.gitignore
+
+# CI/CD
+.github/
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Development builds
+.next/
+out/
+
+# Environment files
+.env*
+
+# OS files
+.DS_Store
+Thumbs.db
