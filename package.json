@@ -13,7 +13,8 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run build:css",
+    "build:css": "tailwindcss -i ./src/styles/globals.css -o ./dist/styles.css --postcss",
     "dev": "tsup --watch",
     "prepare": "npm run build",
     "lint": "tsc --noEmit",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.4.16",
     "clsx": "^2.0.0",
+    "esbuild-plugin-postcss2": "^0.1.2",
     "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

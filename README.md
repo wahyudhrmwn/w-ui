@@ -17,12 +17,35 @@ Modern UI component library yang dibangun untuk Next.js applications dengan Type
 ### Installation
 
 ```bash
-npm install w-ui
+npm install @wahyudhrmwn/w-ui
 # atau
-yarn add w-ui
+yarn add @wahyudhrmwn/w-ui
 # atau
-pnpm add w-ui
+pnpm add @wahyudhrmwn/w-ui
 ```
+
+### ⚠️ PENTING: Import CSS Styling
+
+Setelah menginstall library, Anda **HARUS** import CSS styling-nya agar komponen tampil dengan benar:
+
+**Option 1: Import di file utama aplikasi Anda (\_app.tsx, layout.tsx, atau main.tsx):**
+
+```tsx
+// Di _app.tsx (Pages Router) atau layout.tsx (App Router)
+import "@wahyudhrmwn/w-ui/styles"; // ← WAJIB!
+
+// Import komponen
+import { Button, Card, Input } from "@wahyudhrmwn/w-ui";
+```
+
+**Option 2: Import di file CSS utama Anda:**
+
+```css
+/* Di globals.css atau file CSS utama */
+@import "@wahyudhrmwn/w-ui/styles";
+```
+
+**⚠️ Tanpa import CSS ini, komponen akan tampil tanpa styling!**
 
 ### Setup Tailwind CSS
 
@@ -42,8 +65,8 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    // PENTING: Include path ke w-ui library
-    "./node_modules/w-ui/dist/**/*.{js,ts,tsx}",
+    // PENTING: Include path ke @wahyudhrmwn/w-ui library
+    "./node_modules/@wahyudhrmwn/w-ui/dist/**/*.{js,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -83,8 +106,27 @@ module.exports = {
 
 ### Basic Usage
 
+**1. Import CSS styling di file utama (\_app.tsx atau layout.tsx):**
+
 ```tsx
-import { Button, Card, CardHeader, CardContent, Input } from "w-ui";
+// _app.tsx (Next.js Pages Router)
+import "@wahyudhrmwn/w-ui/styles"; // ← PENTING!
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+```
+
+**2. Gunakan komponen di halaman/komponen Anda:**
+
+```tsx
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardContent,
+  Input,
+} from "@wahyudhrmwn/w-ui";
 
 export default function MyPage() {
   return (
@@ -110,7 +152,7 @@ export default function MyPage() {
 Komponen button dengan berbagai variant dan state.
 
 ```tsx
-import { Button } from 'w-ui';
+import { Button } from '@wahyudhrmwn/w-ui';
 
 // Basic usage
 <Button>Click me</Button>
@@ -151,7 +193,7 @@ import { Button } from 'w-ui';
 Komponen card untuk mengelompokkan konten.
 
 ```tsx
-import { Card, CardHeader, CardContent, CardFooter } from "w-ui";
+import { Card, CardHeader, CardContent, CardFooter } from "@wahyudhrmwn/w-ui";
 
 <Card variant="elevated">
   <CardHeader>
@@ -179,7 +221,7 @@ import { Card, CardHeader, CardContent, CardFooter } from "w-ui";
 Komponen input dengan label, helper text, dan error state.
 
 ```tsx
-import { Input } from "w-ui";
+import { Input } from "@wahyudhrmwn/w-ui";
 
 <Input
   label="Email"
@@ -329,4 +371,5 @@ Jika Anda menemukan bug atau memiliki pertanyaan, silakan buat issue di GitHub r
 ---
 
 **Happy coding! 🚀**
+
 # w-ui
