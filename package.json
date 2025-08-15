@@ -1,6 +1,6 @@
 {
   "name": "@wahyudhrmwn/w-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Modern UI component library for Next.js applications",
   "private": false,
   "type": "module",
