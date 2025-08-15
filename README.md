@@ -12,6 +12,14 @@ Modern UI component library yang dibangun untuk Next.js applications dengan Type
 - ♿ **Accessible** - Komponen yang accessible dan semantic
 - 🔧 **Customizable** - Mudah dikustomisasi sesuai design system
 
+## 📚 **Live Documentation**
+
+**🌐 [View Components Documentation →](https://689ed5f8915aa6d907b5fa04-eheosxnxmo.chromatic.com/)**
+
+Lihat semua komponen, stories, dan cara penggunaan interaktif di Storybook documentation kami.
+
+---
+
 ## 🚀 Quick Start
 
 ### Installation
