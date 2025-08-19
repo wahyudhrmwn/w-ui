@@ -81,7 +81,7 @@ const cascaderSizes = {
 export const Cascader: React.FC<CascaderProps> = ({
   options = [],
   value,
-  defaultValue,
+  defaultValue = [],
   onChange,
   onSelect,
   placeholder = "Please select",

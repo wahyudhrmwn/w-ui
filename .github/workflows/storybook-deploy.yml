@@ -44,7 +44,7 @@ jobs:
           echo "✅ Chromatic token is configured"
 
       - name: Deploy to Chromatic
-        run: npm run chromatic
+        run: npm run chromatic:ci
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 

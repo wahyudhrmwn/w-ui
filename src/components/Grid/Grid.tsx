@@ -246,7 +246,7 @@ export const Col: React.FC<ColProps> = ({
       if (typeof value === "number") {
         // Simple span
         classes.push(`${bpPrefix}w-${Math.round((value / 24) * 100)}`);
-      } else if (typeof value === "object") {
+      } else if (typeof value === "object" && value !== null) {
         // ColSize object
         const {
           span: bpSpan,
@@ -256,7 +256,7 @@ export const Col: React.FC<ColProps> = ({
           pull: bpPull,
         } = value;
 
-        if (bpSpan !== undefined) {
+        if (bpSpan !== undefined && typeof bpSpan === "number") {
           if (bpSpan === 0) {
             classes.push(`${bpPrefix}hidden`);
           } else {
@@ -264,19 +264,19 @@ export const Col: React.FC<ColProps> = ({
           }
         }
 
-        if (bpOffset !== undefined) {
+        if (bpOffset !== undefined && typeof bpOffset === "number") {
           classes.push(`${bpPrefix}ml-[${(bpOffset / 24) * 100}%]`);
         }
 
-        if (bpOrder !== undefined) {
+        if (bpOrder !== undefined && typeof bpOrder === "number") {
           classes.push(`${bpPrefix}order-${bpOrder}`);
         }
 
-        if (bpPush !== undefined) {
+        if (bpPush !== undefined && typeof bpPush === "number") {
           classes.push(`${bpPrefix}left-[${(bpPush / 24) * 100}%]`);
         }
 
-        if (bpPull !== undefined) {
+        if (bpPull !== undefined && typeof bpPull === "number") {
           classes.push(`${bpPrefix}right-[${(bpPull / 24) * 100}%]`);
         }
       }
