@@ -184,8 +184,10 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
               <div className={clsx("mt-0.5", alertVariants[variant].icon)}>
                 {React.isValidElement(IconComponent) ? (
                   IconComponent
+                ) : typeof IconComponent === 'function' ? (
+                  React.createElement(IconComponent)
                 ) : (
-                  <IconComponent />
+                  IconComponent
                 )}
               </div>
             </div>
