@@ -192,21 +192,21 @@ export const Tour: React.FC<TourProps> = ({
     if (left < 10) {
       left = 10;
       if (placement.includes("Left"))
-        finalPlacement = placement.replace("Left", "Right");
+        finalPlacement = placement.replace("Left", "Right") as typeof placement;
     } else if (left + popupRect.width > viewport.width - 10) {
       left = viewport.width - popupRect.width - 10;
       if (placement.includes("Right"))
-        finalPlacement = placement.replace("Right", "Left");
+        finalPlacement = placement.replace("Right", "Left") as typeof placement;
     }
 
     if (top < 10) {
       top = 10;
       if (placement.includes("top"))
-        finalPlacement = placement.replace("top", "bottom");
+        finalPlacement = placement.replace("top", "bottom") as typeof placement;
     } else if (top + popupRect.height > viewport.height - 10) {
       top = viewport.height - popupRect.height - 10;
       if (placement.includes("bottom"))
-        finalPlacement = placement.replace("bottom", "top");
+        finalPlacement = placement.replace("bottom", "top") as typeof placement;
     }
 
     setPopupPosition({ top, left });

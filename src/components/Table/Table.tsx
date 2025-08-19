@@ -459,7 +459,7 @@ export const Table = <T extends Record<string, any>>({
                     : record;
                   const content = column.render
                     ? column.render(value, record, index)
-                    : value;
+                    : String(value ?? "");
 
                   return (
                     <td
