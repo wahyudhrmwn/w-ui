@@ -70,7 +70,7 @@ const CheckIcon = () => (
 );
 
 const meta = {
-  title: "W-UI/Input",
+  title: "Form Controls/Input",
   component: Input,
   parameters: {
     layout: "centered",

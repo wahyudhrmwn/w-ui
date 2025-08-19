@@ -8,7 +8,7 @@ import { Checkbox } from "../Checkbox/Checkbox";
 import { Badge } from "../Badge/Badge";
 
 const meta = {
-  title: "W-UI/Modal",
+  title: "Feedback/Modal",
   component: Modal,
   parameters: {
     layout: "centered",
