@@ -120,11 +120,11 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   ) => {
     const [isVisible, setIsVisible] = React.useState(false);
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
-    const timeoutRef = React.useRef<NodeJS.Timeout>();
+    const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
     const tooltipRef = React.useRef<HTMLDivElement>(null);
     const triggerRef = React.useRef<HTMLElement>(null);
 
-    const clearTimeout = () => {
+    const clearTooltipTimeout = () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -133,14 +133,14 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     const showTooltip = () => {
       if (disabled) return;
 
-      clearTimeout();
+      clearTooltipTimeout();
       timeoutRef.current = setTimeout(() => {
         setIsVisible(true);
       }, showDelay);
     };
 
     const hideTooltip = () => {
-      clearTimeout();
+      clearTooltipTimeout();
       timeoutRef.current = setTimeout(() => {
         setIsVisible(false);
       }, hideDelay);
@@ -242,18 +242,21 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 
     React.useEffect(() => {
       return () => {
-        clearTimeout();
+        clearTooltipTimeout();
       };
     }, []);
 
     // Clone children to add event listeners
     const triggerElement = React.cloneElement(children as React.ReactElement, {
-      ref: (node: HTMLElement) => {
-        triggerRef.current = node;
-        if (typeof (children as any).ref === "function") {
-          (children as any).ref(node);
-        } else if ((children as any).ref) {
-          (children as any).ref.current = node;
+      ref: (node: HTMLElement | null) => {
+        if (node) {
+          triggerRef.current = node;
+        }
+        const childRef = (children as any).ref;
+        if (typeof childRef === "function") {
+          childRef(node);
+        } else if (childRef && childRef.current !== undefined) {
+          childRef.current = node;
         }
       },
       onMouseEnter: handleMouseEnter,
