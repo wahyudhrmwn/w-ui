@@ -244,7 +244,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     };
 
     // Generate default marks
-    const defaultMarks = showMarks
+    const defaultMarks: { value: number; label?: string }[] = showMarks
       ? Array.from({ length: Math.floor((max - min) / step) + 1 }, (_, i) => ({
           value: min + i * step,
         }))

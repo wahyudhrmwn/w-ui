@@ -1,7 +1,7 @@
 import React from "react";
 import { clsx } from "clsx";
 
-export interface ToastProps {
+export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Apakah toast visible
    */

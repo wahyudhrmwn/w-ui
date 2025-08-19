@@ -9,7 +9,7 @@ export interface TableColumn<T = any> {
   /**
    * Header text untuk kolom
    */
-  title: string;
+  title: React.ReactNode;
   /**
    * Data index untuk mengambil value dari row
    */

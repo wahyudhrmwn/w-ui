@@ -492,7 +492,7 @@ export const Transfer: React.FC<TransferProps> = ({
         )}
       </div>
     );
-  }, [showSelectAll, handleSelectAll, disabled, render, onScroll, listStyle]);
+  };
 
   return (
     <div
