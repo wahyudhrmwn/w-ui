@@ -11,6 +11,8 @@ jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -39,6 +41,10 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -62,7 +68,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.W_UI_GITHUB_TOKEN }}
           publish_dir: ./storybook-static
           destination_dir: storybook
 
@@ -70,6 +76,8 @@ jobs:
   visual-tests:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
