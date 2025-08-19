@@ -32,6 +32,17 @@ jobs:
       - name: Build library
         run: npm run build
 
+      - name: Check Chromatic token
+        run: |
+          if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
+            echo "❌ CHROMATIC_PROJECT_TOKEN is not set!"
+            echo "Please add your Chromatic project token to GitHub Secrets:"
+            echo "1. Go to https://github.com/${{ github.repository }}/settings/secrets/actions"
+            echo "2. Add CHROMATIC_PROJECT_TOKEN with your token from https://www.chromatic.com/"
+            exit 1
+          fi
+          echo "✅ Chromatic token is configured"
+
       - name: Deploy to Chromatic
         run: npm run chromatic
         env:
