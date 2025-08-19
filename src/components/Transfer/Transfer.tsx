@@ -50,7 +50,7 @@ const defaultFilterOption = (
   inputValue: string,
   item: TransferItem
 ): boolean => {
-  return (
+  return Boolean(
     item.title.toLowerCase().includes(inputValue.toLowerCase()) ||
     (item.description &&
       item.description.toLowerCase().includes(inputValue.toLowerCase()))
