@@ -216,7 +216,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
     const triggerRef = React.useRef<HTMLDivElement>(null);
     const popoverRef = React.useRef<HTMLDivElement>(null);
-    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+    const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const isControlled = controlledVisible !== undefined;
     const isVisible = isControlled ? controlledVisible : internalVisible;
