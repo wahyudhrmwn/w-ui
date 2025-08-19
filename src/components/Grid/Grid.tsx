@@ -188,10 +188,11 @@ export const Row: React.FC<RowProps> = ({
   if (gutter) {
     if (typeof gutter === "object" && gutter !== null) {
       // For responsive gutters, use the default value
-      const defaultGutter = gutter.xs || gutter.sm || gutter.md || 0;
-      gutterClasses = getGutterClass(defaultGutter);
+      const gutterObject = gutter as Partial<Record<Breakpoint, number | [number, number]>>;
+      const defaultGutter = gutterObject.xs || gutterObject.sm || gutterObject.md || 0;
+      gutterClasses = getGutterClass(typeof defaultGutter === 'number' ? defaultGutter : (Array.isArray(defaultGutter) ? defaultGutter[0] : 0));
     } else {
-      gutterClasses = getGutterClass(gutter);
+      gutterClasses = getGutterClass(gutter as number | [number, number]);
     }
   }
 
@@ -289,7 +290,7 @@ export const Col: React.FC<ColProps> = ({
       (typeof v === "number" || (typeof v === "object" && v.span !== undefined))
   );
 
-  if (!hasBreakpointSpans && span !== undefined) {
+  if (!hasBreakpointSpans && span !== undefined && typeof span === 'number') {
     if (span === 0) {
       classes.push("hidden");
     } else {
@@ -325,7 +326,7 @@ export const Col: React.FC<ColProps> = ({
           (val) => `${Math.round((val / 24) * 10000) / 100}%]`
         )
       );
-    } else {
+    } else if (typeof offset === "number") {
       classes.push(`ml-[${Math.round((offset / 24) * 10000) / 100}%]`);
     }
   }
@@ -333,7 +334,7 @@ export const Col: React.FC<ColProps> = ({
   if (order !== undefined) {
     if (typeof order === "object") {
       classes.push(...getResponsiveClasses(order, "order-"));
-    } else {
+    } else if (typeof order === "number") {
       classes.push(`order-${order}`);
     }
   }
@@ -347,7 +348,7 @@ export const Col: React.FC<ColProps> = ({
           (val) => `${(val / 24) * 100}%]`
         )
       );
-    } else {
+    } else if (typeof push === "number") {
       classes.push(`left-[${(push / 24) * 100}%]`);
     }
   }
@@ -361,7 +362,7 @@ export const Col: React.FC<ColProps> = ({
           (val) => `${(val / 24) * 100}%]`
         )
       );
-    } else {
+    } else if (typeof pull === "number") {
       classes.push(`right-[${(pull / 24) * 100}%]`);
     }
   }
