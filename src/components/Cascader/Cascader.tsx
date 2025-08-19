@@ -244,10 +244,10 @@ export const Cascader: React.FC<CascaderProps> = ({
 
     for (let i = 0; i < activeValue.length; i++) {
       const levelValue = activeValue[i];
-      if (!levelValue || levelValue.length <= i) break;
+      if (!levelValue) break;
 
       const option = currentOptions.find(
-        (opt) => opt[valueField as keyof CascaderOption] === levelValue[i]
+        (opt) => opt[valueField as keyof CascaderOption] === levelValue
       );
       if (option) {
         const children = option[childrenField as keyof CascaderOption] as
@@ -272,7 +272,7 @@ export const Cascader: React.FC<CascaderProps> = ({
         option[valueField as keyof CascaderOption],
       ];
       const newActiveValue = [...activeValue];
-      newActiveValue[level] = newValue;
+      newActiveValue[level] = option[valueField as keyof CascaderOption] as string | number;
       setActiveValue(newActiveValue.slice(0, level + 1));
 
       // Load data if needed
@@ -363,7 +363,7 @@ export const Cascader: React.FC<CascaderProps> = ({
 
       // Update active value for hover expansion
       const newActiveValue = [...activeValue];
-      newActiveValue[level] = newValue;
+      newActiveValue[level] = option[valueField as keyof CascaderOption] as string | number;
       setActiveValue(newActiveValue.slice(0, level + 1));
     },
     [expandTrigger, currentValue, activeValue, valueField]
@@ -496,9 +496,7 @@ export const Cascader: React.FC<CascaderProps> = ({
                       ] as CascaderOption[]
                     ).length > 0;
 
-                  const isSelected =
-                    activeValue[levelIndex] &&
-                    activeValue[levelIndex][levelIndex] === optionValue;
+                  const isSelected = activeValue[levelIndex] === optionValue;
                   const isInPath = currentValue[levelIndex] === optionValue;
 
                   return (
