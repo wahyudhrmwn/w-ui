@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { Tooltip } from "./Tooltip";
 import { Button } from "../Button";
