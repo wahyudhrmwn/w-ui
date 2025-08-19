@@ -108,7 +108,7 @@ export const Cascader: React.FC<CascaderProps> = ({
     defaultValue || []
   );
   const [isOpen, setIsOpen] = useState(false);
-  const [activeValue, setActiveValue] = useState<CascaderValue[]>([]);
+  const [activeValue, setActiveValue] = useState<(string | number)[]>([]);
   const [internalSearchValue, setInternalSearchValue] = useState("");
   const [hoverValue, setHoverValue] = useState<CascaderValue>([]);
 
@@ -187,6 +187,13 @@ export const Cascader: React.FC<CascaderProps> = ({
       .map((opt) => opt[labelField as keyof CascaderOption] as string)
       .join(separator);
   }, [selectedOptions, displayRender, labelField, separator]);
+
+  // Get string representation for input value
+  const displayText = useMemo(() => {
+    return selectedOptions
+      .map((opt) => opt[labelField as keyof CascaderOption] as string)
+      .join(separator);
+  }, [selectedOptions, labelField, separator]);
 
   // Filter options for search
   const getFilteredOptions = useCallback(
@@ -598,7 +605,7 @@ export const Cascader: React.FC<CascaderProps> = ({
           <input
             ref={inputRef}
             type="text"
-            value={isOpen ? currentSearchValue : displayLabel || ""}
+            value={isOpen ? currentSearchValue : displayText || ""}
             onChange={handleInputChange}
             placeholder={placeholder}
             className="flex-1 bg-transparent outline-none"
