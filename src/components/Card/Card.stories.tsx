@@ -5,7 +5,7 @@ import { Button } from "../Button/Button";
 import { Badge } from "../Badge/Badge";
 
 const meta = {
-  title: "W-UI/Card",
+  title: "Data Display/Card",
   component: Card,
   parameters: {
     layout: "centered",

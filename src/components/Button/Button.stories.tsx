@@ -37,7 +37,7 @@ const ArrowRightIcon = () => (
 );
 
 const meta = {
-  title: "W-UI/Button",
+  title: "Form Controls/Button",
   component: Button,
   parameters: {
     layout: "centered",

@@ -42,7 +42,7 @@ const BellIcon = () => (
 );
 
 const meta = {
-  title: "W-UI/Badge",
+  title: "Data Display/Badge",
   component: Badge,
   parameters: {
     layout: "centered",
