@@ -25,7 +25,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "deploy-storybook": "npm run build-storybook && echo 'Storybook built successfully! Upload storybook-static folder to your hosting platform.'",
-    "chromatic": "npx chromatic --project-token=chpt_ce83742810f9fb5 --force-rebuild"
+    "chromatic": "npx chromatic --force-rebuild",
+    "chromatic:ci": "npx chromatic --exit-zero-on-changes"
   },
   "keywords": [
     "react",

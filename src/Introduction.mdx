@@ -4,7 +4,7 @@ import { Meta } from "@storybook/blocks";
 
 # W-UI Component Library
 
-Selamat datang di **W-UI Component Library** - koleksi komponen React modern yang dibangun dengan TypeScript dan Tailwind CSS untuk aplikasi Next.js.
+Selamat datang di **W-UI Component Library** - koleksi lengkap **50+ komponen React modern** yang dibangun dengan TypeScript dan Tailwind CSS untuk aplikasi Next.js.
 
 ## ✨ Features
 
@@ -15,23 +15,80 @@ Selamat datang di **W-UI Component Library** - koleksi komponen React modern yan
 - 📱 **Responsive** - Desain responsive out-of-the-box
 - ♿ **Accessible** - Komponen accessible dan semantic
 - 🔧 **Customizable** - Mudah dikustomisasi sesuai design system
+- 📊 **Komprehensif** - 50+ komponen untuk semua kebutuhan UI
+- 🎯 **Production Ready** - Komponen yang telah teruji dan siap produksi
+- 🎪 **Interactive** - Support untuk advanced interactions dan animations
+- 📋 **Form Complete** - Semua form controls dengan validasi built-in
+- 🎨 **Theme System** - Consistent design tokens dan color schemes
 
 ## 📚 Komponen Tersedia
 
-### Core Components
+### Form Components
 
 - **Button** - Berbagai variant dan states dengan icon support
 - **Input** - Form input dengan validasi dan helper text
+- **Textarea** - Multi-line text input dengan auto-resize
 - **Checkbox** - Boolean selections dengan indeterminate state
+- **Radio** - Single choice selections dalam group
+- **Select** - Dropdown selection dengan search
+- **Switch** - Toggle controls untuk boolean values
+- **Slider** - Range input dengan custom marks
+- **Rating** - Star rating component
+- **ColorPicker** - Color selection dengan preset palettes
+- **DatePicker** - Date selection dengan calendar
+- **TimePicker** - Time selection dengan format customization
+- **Calendar** - Full calendar component dengan events
+- **AutoComplete** - Input dengan suggestions
+- **Cascader** - Hierarchical selection
+- **Upload** - File upload dengan drag & drop
 
 ### Layout Components
 
 - **Card** - Container untuk mengelompokkan konten
 - **Modal** - Dialog dan overlay dengan keyboard navigation
+- **Dialog** - Simple dialog components
+- **Drawer** - Side panel untuk navigation atau actions
+- **Grid** - Responsive grid layout system
+- **Space** - Spacing utility component
+- **Divider** - Visual separator lines
+- **Accordion** - Collapsible content panels
 
 ### Display Components
 
 - **Badge** - Label dan status indicators
+- **Alert** - Notification dan pesan penting
+- **Avatar** - User profile pictures dan initials
+- **Progress** - Progress bars dan loading states
+- **Skeleton** - Loading placeholder animations
+- **Spinner** - Loading indicators
+- **Statistics** - Numerical data display
+- **Empty** - Empty state illustrations
+- **Image** - Enhanced image component dengan lazy loading
+- **Watermark** - Background watermark overlay
+
+### Navigation Components
+
+- **Breadcrumb** - Hierarchical navigation path
+- **Pagination** - Data pagination controls
+- **Tabs** - Tab navigation interface
+- **Stepper** - Step-by-step progress indicator
+- **BackTop** - Scroll to top button
+- **Timeline** - Chronological event display
+- **Tour** - Guided tour untuk onboarding
+
+### Feedback Components
+
+- **Toast** - Temporary notification messages
+- **Tooltip** - Hover information bubbles
+- **Popover** - Click-triggered content overlay
+- **Dropdown** - Action menus dan option lists
+- **Result** - Operation result pages (success/error/404)
+
+### Data Entry & Display
+
+- **Table** - Data table dengan sorting dan filtering
+- **Transfer** - Dual list selection
+- **Tree** - Hierarchical data display
 
 ## 🚀 Quick Start
 
@@ -87,7 +144,8 @@ module.exports = {
 
 ### Basic Usage
 
-**1. Import CSS di file utama aplikasi (_app.tsx atau layout.tsx):**
+**1. Import CSS di file utama aplikasi (\_app.tsx atau layout.tsx):**
+
 ```tsx
 // _app.tsx (Next.js Pages Router)
 import "@wahyudhrmwn/w-ui/styles"; // ← PENTING!
@@ -98,17 +156,38 @@ export default function App({ Component, pageProps }) {
 ```
 
 **2. Gunakan komponen di halaman/komponen Anda:**
+
 ```tsx
-import { Button, Card, CardHeader, CardContent, Input } from "@wahyudhrmwn/w-ui";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardContent,
+  Input,
+  Badge,
+  Alert,
+  Avatar,
+  Tabs,
+} from "@wahyudhrmwn/w-ui";
 
 export default function MyPage() {
   return (
     <Card>
       <CardHeader>
-        <h2>Welcome to W-UI</h2>
+        <div className="flex items-center gap-3">
+          <Avatar src="/avatar.jpg" alt="User" size="md" />
+          <div>
+            <h2>Welcome to W-UI</h2>
+            <Badge variant="success">Ready to use</Badge>
+          </div>
+        </div>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <Alert type="info" title="Informasi">
+          Library W-UI menyediakan 50+ komponen siap pakai!
+        </Alert>
+
+        <div className="space-y-4 mt-4">
           <Input label="Email" type="email" placeholder="Enter your email" />
           <Button variant="primary">Get Started</Button>
         </div>
@@ -138,16 +217,70 @@ Semua komponen dapat dikustomisasi dengan:
 
 ## 📖 Navigation
 
-Gunakan sidebar di sebelah kiri untuk menjelajahi semua komponen:
+Gunakan sidebar di sebelah kiri untuk menjelajahi semua komponen. Komponen telah dikelompokkan berdasarkan kategori:
+
+### Form Components
 
 - **W-UI/Button** - Button variants dan interactions
 - **W-UI/Input** - Form inputs dengan validasi
-- **W-UI/Card** - Layout containers
-- **W-UI/Badge** - Status indicators
+- **W-UI/Textarea** - Multi-line text input
 - **W-UI/Checkbox** - Boolean selections
-- **W-UI/Modal** - Dialogs dan overlays
+- **W-UI/Radio** - Single choice selections
+- **W-UI/Select** - Dropdown selections
+- **W-UI/Switch** - Toggle controls
+- **W-UI/Slider** - Range inputs
+- **W-UI/Rating** - Star ratings
+- **W-UI/ColorPicker** - Color selection
+- **W-UI/DatePicker** - Date selection
+- **W-UI/TimePicker** - Time selection
+- **W-UI/Calendar** - Full calendar
+- **W-UI/AutoComplete** - Input dengan suggestions
+- **W-UI/Cascader** - Hierarchical selection
+- **W-UI/Upload** - File uploads
 
-Setiap story mendemonstrasikan penggunaan yang berbeda dan dapat diinteraksikan langsung di Storybook.
+### Layout & Navigation
+
+- **W-UI/Card** - Layout containers
+- **W-UI/Modal** - Dialogs dan overlays
+- **W-UI/Dialog** - Simple dialogs
+- **W-UI/Drawer** - Side panels
+- **W-UI/Grid** - Grid layouts
+- **W-UI/Space** - Spacing utilities
+- **W-UI/Divider** - Visual separators
+- **W-UI/Accordion** - Collapsible panels
+- **W-UI/Breadcrumb** - Navigation paths
+- **W-UI/Pagination** - Data pagination
+- **W-UI/Tabs** - Tab navigation
+- **W-UI/Stepper** - Step indicators
+- **W-UI/BackTop** - Scroll to top
+- **W-UI/Timeline** - Event timelines
+- **W-UI/Tour** - Guided tours
+
+### Display & Feedback
+
+- **W-UI/Badge** - Status indicators
+- **W-UI/Alert** - Notifications
+- **W-UI/Avatar** - User avatars
+- **W-UI/Progress** - Progress bars
+- **W-UI/Skeleton** - Loading skeletons
+- **W-UI/Spinner** - Loading indicators
+- **W-UI/Statistics** - Data display
+- **W-UI/Empty** - Empty states
+- **W-UI/Image** - Enhanced images
+- **W-UI/Watermark** - Watermarks
+- **W-UI/Toast** - Toast notifications
+- **W-UI/Tooltip** - Hover tooltips
+- **W-UI/Popover** - Content overlays
+- **W-UI/Dropdown** - Action menus
+- **W-UI/Result** - Result pages
+
+### Data Components
+
+- **W-UI/Table** - Data tables
+- **W-UI/Transfer** - Dual selections
+- **W-UI/Tree** - Tree structures
+
+Setiap story mendemonstrasikan penggunaan yang berbeda dan dapat diinteraksikan langsung di Storybook. Gunakan **Controls panel** untuk mengubah props secara real-time!
 
 ---
 
