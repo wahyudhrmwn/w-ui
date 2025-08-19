@@ -267,12 +267,14 @@ export const Cascader: React.FC<CascaderProps> = ({
     (option: CascaderOption, level: number) => {
       if (option.disabled) return;
 
-      const newValue = [
+      const newValue: CascaderValue = [
         ...currentValue.slice(0, level),
-        option[valueField as keyof CascaderOption],
+        option[valueField as keyof CascaderOption] as string | number,
       ];
       const newActiveValue = [...activeValue];
-      newActiveValue[level] = option[valueField as keyof CascaderOption] as string | number;
+      newActiveValue[level] = option[valueField as keyof CascaderOption] as
+        | string
+        | number;
       setActiveValue(newActiveValue.slice(0, level + 1));
 
       // Load data if needed
@@ -306,23 +308,24 @@ export const Cascader: React.FC<CascaderProps> = ({
         | undefined;
       const isLeaf = option.isLeaf || !children || children.length === 0;
 
-      if (isLeaf || changeOnSelect) {
-        const newSelectedOptions: CascaderOption[] = [];
-        let currentOpts = options;
+      // Build selected options for callbacks
+      const newSelectedOptions: CascaderOption[] = [];
+      let currentOpts = options;
 
-        for (const val of newValue) {
-          const opt = currentOpts.find(
-            (o) => o[valueField as keyof CascaderOption] === val
-          );
-          if (opt) {
-            newSelectedOptions.push(opt);
-            currentOpts =
-              (opt[
-                childrenField as keyof CascaderOption
-              ] as CascaderOption[]) || [];
-          }
+      for (const val of newValue) {
+        const opt = currentOpts.find(
+          (o) => o[valueField as keyof CascaderOption] === val
+        );
+        if (opt) {
+          newSelectedOptions.push(opt);
+          currentOpts =
+            (opt[
+              childrenField as keyof CascaderOption
+            ] as CascaderOption[]) || [];
         }
+      }
 
+      if (isLeaf || changeOnSelect) {
         if (value === undefined) {
           setInternalValue(newValue);
         }
@@ -335,7 +338,7 @@ export const Cascader: React.FC<CascaderProps> = ({
         }
       }
 
-      onSelect?.(newValue, []);
+      onSelect?.(newValue, newSelectedOptions);
     },
     [
       currentValue,
@@ -355,15 +358,17 @@ export const Cascader: React.FC<CascaderProps> = ({
     (option: CascaderOption, level: number) => {
       if (expandTrigger !== "hover" || option.disabled) return;
 
-      const newValue = [
+      const newValue: CascaderValue = [
         ...currentValue.slice(0, level),
-        option[valueField as keyof CascaderOption],
+        option[valueField as keyof CascaderOption] as string | number,
       ];
       setHoverValue(newValue);
 
       // Update active value for hover expansion
       const newActiveValue = [...activeValue];
-      newActiveValue[level] = option[valueField as keyof CascaderOption] as string | number;
+      newActiveValue[level] = option[valueField as keyof CascaderOption] as
+        | string
+        | number;
       setActiveValue(newActiveValue.slice(0, level + 1));
     },
     [expandTrigger, currentValue, activeValue, valueField]
