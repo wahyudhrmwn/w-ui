@@ -122,7 +122,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
     const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
     const tooltipRef = React.useRef<HTMLDivElement>(null);
-    const triggerRef = React.useRef<HTMLElement>(null);
+    const triggerRef = React.useRef<HTMLElement | null>(null);
 
     const clearTooltipTimeout = () => {
       if (timeoutRef.current) {
@@ -246,19 +246,22 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       };
     }, []);
 
+    // Callback ref function
+    const setTriggerRef = React.useCallback((node: HTMLElement | null) => {
+      triggerRef.current = node;
+      
+      // Forward ref to original child component
+      const childRef = (children as any).ref;
+      if (typeof childRef === "function") {
+        childRef(node);
+      } else if (childRef && typeof childRef === "object" && childRef !== null) {
+        childRef.current = node;
+      }
+    }, [children]);
+
     // Clone children to add event listeners
     const triggerElement = React.cloneElement(children as React.ReactElement, {
-      ref: (node: HTMLElement | null) => {
-        if (node) {
-          triggerRef.current = node;
-        }
-        const childRef = (children as any).ref;
-        if (typeof childRef === "function") {
-          childRef(node);
-        } else if (childRef && childRef.current !== undefined) {
-          childRef.current = node;
-        }
-      },
+      ref: setTriggerRef,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
